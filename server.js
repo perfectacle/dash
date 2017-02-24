@@ -1,35 +1,40 @@
 'use strict';
-var path = require('path');
-var webpack = require('webpack');
-var webpackDevServer = require('webpack-dev-server');
-var config = require('./webpack.config.dev.js');
+const express =  require('express');
+const bodyParser = require('body-parser');
+const morgan = require('morgan');
+const WebpackDevServer = require('webpack-dev-server');
+const webpack = require('webpack');
 
-var compiler = webpack(config);
+const app = express();
+const port = 3000;
+const devPort = 3001;
 
-var serverOptions = {
-  contentBase: path.resolve(__dirname, 'app/src'),
-  progress: true,
-  hot: true,
-  watch: true,
-  verbose: true,
-  publicPath: config.URL,
-  headers: { 'Access-Control-Allow-Origin': '*' },
-  historyApiFallback: true,
-  stats: {
-    cached: true,
-    cachedAssets: true,
-    chunks: true,
-    chunkModules: false,
-    colors: true,
-    hash: false,
-    reasons: true,
-    timings: true,
-    version: false
-  }
-};
+// dev-server config
+const config = require('./webpack.dev.config.js');
+const compiler = webpack(config);
+const devServer = new WebpackDevServer(compiler, config.devServer);
 
-var server = new webpackDevServer(compiler, serverOptions);
+// parse JSON and url-encoded query
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
-server.listen(config.PORT, function() {
-  console.log('now listening ' + config.URL);
+// print the request log on console
+app.use(morgan('dev'));
+
+// parse JSON and url-encoded query
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+
+// print the request log on console
+app.use(morgan('dev'));
+
+// dev-server open
+devServer.listen(devPort, () => {
+  console.log('webpack-dev-server is listening on port', devPort);
+});
+
+// server-open
+app.use('/', express.static(__dirname + '/app/dist'));
+app.listen(port, () => {
+  console.log('Express listening on port', port);
 });
