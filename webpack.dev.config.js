@@ -48,9 +48,6 @@ module.exports = {
     }, {
       test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
       loader: 'file?name=fonts/[name].[ext]'
-    }, {
-      test: /\.(jp(e)g|gif|png)?$/,
-      loader: 'file?name=img/[name].[ext]'
     }]
   },
   devServer: {
@@ -60,7 +57,7 @@ module.exports = {
     historyApiFallback: true,
     contentBase: ROOT,
     proxy: {
-      '*': 'http://localhost:3000'
+      '**': 'http://localhost:3000/'
     }
   }
 };

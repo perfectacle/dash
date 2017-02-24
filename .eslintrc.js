@@ -40,6 +40,9 @@ module.exports = {
     "no-console": [
       "warn"
     ],
+    "no-undef": [
+      "off"
+    ],
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error"
   }

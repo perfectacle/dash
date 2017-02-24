@@ -28,6 +28,9 @@ app.use(bodyParser.json());
 // print the request log on console
 app.use(morgan('dev'));
 
+// set the secret key variable for jwt
+app.set('jwt-secret', 'SeCrEtKeYfOrHaShInG');
+
 // dev-server open
 devServer.listen(devPort, () => {
   console.log('webpack-dev-server is listening on port', devPort);
@@ -38,3 +41,5 @@ app.use('/', express.static(__dirname + '/app/dist'));
 app.listen(port, () => {
   console.log('Express listening on port', port);
 });
+
+app.use('/api', require('./routes/api'));
