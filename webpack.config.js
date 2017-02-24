@@ -47,6 +47,15 @@ module.exports = {
     }, {
       test: /\.css$/,
       loader: ExtractTextPlugin.extract('style', 'css?minify', {publicPath: './'})
+    }, {
+      test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+      loader: 'url?limit=10000&mimetype=application/font-woff&name=fonts/[name].[ext]'
+    }, {
+      test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+      loader: 'file?name=fonts/[name].[ext]'
+    }, {
+      test: /\.(jp(e)g|gif|png)?$/,
+      loader: 'file?name=img/[name].[ext]'
     }]
   }
 };

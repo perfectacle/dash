@@ -14,7 +14,7 @@ module.exports = {
   ],
   output: {
     path: '/',
-    publicPath: '/',
+    publicPath: 'http://localhost:3001/',
     filename: 'bundle.js'
   },
   plugins: [
@@ -42,6 +42,15 @@ module.exports = {
     }, {
       test: /\.html/,
       loaders: ['raw-loader']
+    }, {
+      test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+      loader: 'url?limit=10000&mimetype=application/font-woff&name=fonts/[name].[ext]'
+    }, {
+      test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+      loader: 'file?name=fonts/[name].[ext]'
+    }, {
+      test: /\.(jp(e)g|gif|png)?$/,
+      loader: 'file?name=img/[name].[ext]'
     }]
   },
   devServer: {
