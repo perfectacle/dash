@@ -1,7 +1,5 @@
 'use strict';
 const webpack = require('webpack');
-const HtmlWebpackPlugin  = require('html-webpack-plugin');
-const ExtractTextPlugin  = require('extract-text-webpack-plugin');
 
 const ROOT = './app/src';
 
@@ -15,7 +13,7 @@ module.exports = {
   output: {
     path: '/',
     publicPath: 'http://localhost:3001/',
-    filename: 'bundle.js'
+    filename: 'bundle.min.js'
   },
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
@@ -25,11 +23,7 @@ module.exports = {
     }),
     new webpack.NoErrorsPlugin(),
     new webpack.EvalSourceMapDevToolPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new HtmlWebpackPlugin({
-      template: `${ROOT}/index.html`,
-    }),
-    new ExtractTextPlugin('bundle.css'),
+    new webpack.HotModuleReplacementPlugin()
   ],
   module: {
     loaders: [{

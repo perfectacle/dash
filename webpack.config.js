@@ -22,6 +22,7 @@ module.exports = {
     new webpack.optimize.OccurrenceOrderPlugin(),
     new HtmlWebpackPlugin({
       template: `${ROOT}/index.html`,
+      inject: false,
       minify: {
         collapseWhitespace: true,
         conservativeCollapse: true,

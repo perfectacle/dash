@@ -43,3 +43,6 @@ app.listen(port, () => {
 });
 
 app.use('/api', require('./routes/api'));
+app.get('*', function (request, response){
+  response.sendFile(__dirname + '/app/src/index.html');
+});
