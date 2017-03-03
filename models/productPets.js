@@ -3,7 +3,6 @@ const models = require('./index');
 
 module.exports = (sequelize, DataTypes) => (
   sequelize.define('product_pets', {
-    owner_id: {type: DataTypes.INTEGER, allowNull: false, references: {model: models.contract_users, key: 'id'}},
     kind: {type: DataTypes.STRING(100)},
     name: {type: DataTypes.STRING(80), allowNull: false},
     birth: {type: DataTypes.DATE, allowNull: false},

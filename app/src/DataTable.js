@@ -35,26 +35,26 @@ export default class DataTable extends Component {
   render() {
     const columns = [{
       header: '고객 성명',
-      accessor: 'cliName',
+      accessor: 'name',
       width: 150
     }, {
       header: '고객 성별',
-      accessor: 'cliGender'
+      accessor: 'sex'
     }, {
       header: '휴대폰 번호',
-      accessor: 'cliDigits',
+      accessor: 'phone',
       width: 150
     }, {
       header: '이메일',
-      accessor: 'cliEmail',
+      accessor: 'email',
       width: 250
     }, {
       header: '주소',
-      accessor: 'cliAddress',
+      accessor: 'homeaddress',
       width: 300
     }, {
       header: '고양이/강아지',
-      accessor: 'catOrDog'
+      accessor: 'product_pets.kind'
     }, {
       header: '반려동물 이름',
       accessor: 'petName',
@@ -81,7 +81,7 @@ export default class DataTable extends Component {
       header: '계약일',
       accessor: 'contDate'
     }, {
-      header: '비고',
+      header: '사진',
       accessor: 'note',
       width: 300,
       maxWidth: 3000,

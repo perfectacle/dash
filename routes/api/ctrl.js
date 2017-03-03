@@ -14,14 +14,20 @@ exports.pet = (req, res) => {
     models.contract_users.findAll({
       include: {
         model: models.product_pets,
-        required: true,
-        include: {
-          model: models.payments,
-          required: true
-        }
+        required: true
       }
     }).then(results => {
-      res.json(results);
+      const tmp = [];
+      results.forEach(v => {
+        v.dataValues.product_pets.forEach(val => {
+          for(let key in val.dataValues) {
+            v.dataValues['pet_' + key] = val.dataValues[key];
+          }
+          tmp.push(v.dataValues);
+          delete tmp[tmp.length-1].product_pets;
+        });
+      });
+      res.json(tmp);
     }).catch(err => {
       res.json(err);
     });
