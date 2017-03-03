@@ -2,17 +2,17 @@
 const fs  = require('fs');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
+const config = require('../../../config');
+
+const secret = config.key;
 
 exports.login = (req, res) => {
   const {id, pw} = req.body;
-  const secret = req.app.get('jwt-secret');
-  const hashPW = crypto.createHmac('sha1', secret).update(pw).digest('base64');
-  const realPW = crypto.createHmac('sha1', secret).update('1234').digest('base64');
 
-  if(id !== 'admin' || hashPW !== realPW) {
+  if(!config.users[id] || pw !== config.users[id].pw) {
     return res.status(403).json({
-      message: (id !== 'admin') ? '아이디를 확인해주세요!' : '비밀번호를 확인해주세요!',
-      dom: (id !== 'admin') ? 'id' : 'pw'
+      message: !config.users[id] ? '아이디를 확인해주세요!' : '비밀번호를 확인해주세요!',
+      dom: !config.users[id] ? 'id' : 'pw'
     });
   }
   res.json({
@@ -32,34 +32,15 @@ exports.check = (req, res) => {
   // token does not exist
   if(!token) {
     if(isLoginPage) return res.json({success: true});
-    return res.status(401).json({
-      success: false
-    });
+    return res.status(401).json({success: false});
   }
 
-  jwt.verify(token, req.app.get('jwt-secret'), (err) => {
-    if(isLoginPage) return res.json({success: false});
+  jwt.verify(token, secret, (err) => {
     if(err) {
-      return res.status(401).json({
-        success: false
-      });
+      if(isLoginPage) return res.json({success: true});
+      return res.status(401).json({success: false});
     }
-    res.json({
-      success: true
-    });
-  });
-};
-
-exports.pet = (req, res) => {
-  const {'x-access-token': token} = req.headers;
-  jwt.verify(token, req.app.get('jwt-secret'), (err) => {
-    if(err) {
-      return res.status(401).json({
-        success: false
-      });
-    }
-    fs.readFile( __dirname + '/../../../data/pet.json', 'utf8', (err, data) => {
-      res.end(data);
-    });
+    if(isLoginPage) return res.status(401).json({success: false});
+    res.json({success: true});
   });
 };

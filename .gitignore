@@ -4,3 +4,4 @@ app/dist
 server/build
 *.iml
 *.log
+config.js

@@ -1,15 +1,29 @@
 'use strict';
-const fs  = require('fs');
 const jwt = require('jsonwebtoken');
+const config = require('../../config');
+const models = require('../../models');
+
+const secret = config.key;
 
 exports.pet = (req, res) => {
   const {'x-access-token': token} = req.headers;
-  jwt.verify(token, req.app.get('jwt-secret'), (err) => {
+  jwt.verify(token, secret, (err) => {
     if(err) {
       return res.status(401).json({});
     }
-    fs.readFile( __dirname + '/../../data/pet.json', 'utf8', (err, data) => {
-      res.end(data);
+    models.contract_users.findAll({
+      include: {
+        model: models.product_pets,
+        required: true,
+        include: {
+          model: models.payments,
+          required: true
+        }
+      }
+    }).then(results => {
+      res.json(results);
+    }).catch(err => {
+      res.json(err);
     });
   });
 };
