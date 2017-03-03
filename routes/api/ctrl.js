@@ -20,10 +20,11 @@ exports.pet = (req, res) => {
       const tmp = [];
       results.forEach(v => {
         v.dataValues.product_pets.forEach(val => {
+          const temp = Object.assign({}, v.dataValues);
           for(let key in val.dataValues) {
-            v.dataValues['pet_' + key] = val.dataValues[key];
+            temp['pet_' + key] = val.dataValues[key];
           }
-          tmp.push(v.dataValues);
+          tmp.push(temp);
           delete tmp[tmp.length-1].product_pets;
         });
       });

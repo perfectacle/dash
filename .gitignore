@@ -1,7 +1,7 @@
 .idea
 node_modules
 app/dist
-server/build
 *.iml
 *.log
 config.js
+test*.js
