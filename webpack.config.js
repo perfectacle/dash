@@ -2,6 +2,7 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const autoprefixer = require('autoprefixer');
 
 const ROOT = './app/src';
 const DIST = './app/dist';
@@ -23,6 +24,9 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: `${ROOT}/index.html`,
       inject: false,
+      assets: {
+        style: 'style.css'
+      },
       minify: {
         collapseWhitespace: true,
         conservativeCollapse: true,
@@ -40,6 +44,11 @@ module.exports = {
     publicPath: '/',
     filename: 'bundle.min.js'
   },
+  postcss: [
+    autoprefixer({
+      browsers: ['last 2 versions', '> 10%', 'ie 9']
+    })
+  ],
   module: {
     loaders: [{
       test: /\.js$/,
@@ -47,7 +56,7 @@ module.exports = {
       exclude: /node_modules/
     }, {
       test: /\.css$/,
-      loader: ExtractTextPlugin.extract('style', 'css?minify', {publicPath: './'})
+      loader: ExtractTextPlugin.extract('style', 'css!postcss-loader', {publicPath: './'})
     }, {
       test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
       loader: 'url?limit=10000&mimetype=application/font-woff&name=fonts/[name].[ext]'

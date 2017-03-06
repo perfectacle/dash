@@ -1,5 +1,6 @@
 'use strict';
 import React, {Component} from 'react';
+import '../styles/Spinner.css';
 
 export default class Spinner extends Component {
   render() {

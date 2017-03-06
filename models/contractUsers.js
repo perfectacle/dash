@@ -1,6 +1,4 @@
 'use strict';
-const models = require('./index');
-
 module.exports = (sequelize, DataTypes) => (
   sequelize.define('contract_users', {
     name: {type: DataTypes.STRING(20), allowNull: false},

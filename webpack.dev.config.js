@@ -1,5 +1,6 @@
 'use strict';
 const webpack = require('webpack');
+const autoprefixer = require('autoprefixer');
 
 const ROOT = './app/src';
 
@@ -25,6 +26,11 @@ module.exports = {
     new webpack.EvalSourceMapDevToolPlugin(),
     new webpack.HotModuleReplacementPlugin()
   ],
+  postcss: [
+    autoprefixer({
+      browsers: ['last 2 versions', '> 10%', 'ie 9']
+    })
+  ],
   module: {
     loaders: [{
       test: /\.js$/,
@@ -32,7 +38,7 @@ module.exports = {
       exclude: /node_modules/,
     }, {
       test: /\.css$/,
-      loaders: ['style', 'css?sourceMap']
+      loaders: ['style', 'css?sourceMap', 'postcss-loader']
     }, {
       test: /\.html/,
       loaders: ['raw-loader']
@@ -42,6 +48,9 @@ module.exports = {
     }, {
       test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
       loader: 'file?name=fonts/[name].[ext]'
+    }, {
+      test: /\.(jp(e)g|gif|png)?$/,
+      loader: 'file?name=img/[name].[ext]'
     }]
   },
   devServer: {

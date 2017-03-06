@@ -1,3 +1,6 @@
+@charset "utf-8";
+
+/* 수직 중앙 정렬 */
 .outer {
     display: table;
     position: absolute;
@@ -14,4 +17,10 @@
     margin-left: auto;
     margin-right: auto;
     width: 100%
+}
+
+/* 투명한 버튼 */
+.transBtn {background-color: transparent; border: none}
+div {
+    user-select: none
 }

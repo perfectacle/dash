@@ -1,0 +1,5 @@
+@charset "utf-8";
+.ReactTable .rt-thead .rt-th {font-weight: bold}
+.ReactTable .rt-tbody .rt-tr-group {border-bottom: 1px solid black}
+.ReactTable .rt-thead .rt-th, .ReactTable .rt-tbody .rt-td {text-align: center; border-right: 1px solid black}
+.opacity-higher {opacity: 0.1}

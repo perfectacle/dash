@@ -1,6 +1,4 @@
 'use strict';
-const models = require('./index');
-
 module.exports = (sequelize, DataTypes) => (
   sequelize.define('product_pets', {
     kind: {type: DataTypes.STRING(100)},

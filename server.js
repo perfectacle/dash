@@ -22,11 +22,11 @@ app.use(bodyParser.json());
 app.use(morgan('dev'));
 
 // parse JSON and url-encoded query
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-// print the request log on console
-app.use(morgan('dev'));
+// define root path
+global.ROOT = __dirname;
 
 // dev-server open
 devServer.listen(devPort, () => {
@@ -39,7 +39,10 @@ app.listen(port, () => {
   console.log('Express listening on port', port);
 });
 
+// server router
 app.use('/api', require('./routes/api'));
+
+// client router
 app.get('*', function (request, response){
   response.sendFile(__dirname + '/app/src/index.html');
 });

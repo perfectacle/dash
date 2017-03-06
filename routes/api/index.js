@@ -1,9 +1,9 @@
 'use strict';
 const router = require('express').Router();
 const auth = require('./auth');
-const ctrl = require('./ctrl');
+const pet = require('./pet');
 
 router.use('/auth', auth);
-router.get('/pet', ctrl.pet);
+router.use('/pet', pet);
 
 module.exports = router;

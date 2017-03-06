@@ -1,8 +1,7 @@
 'use strict';
 const fs  = require('fs');
 const jwt = require('jsonwebtoken');
-const crypto = require('crypto');
-const config = require('../../../config');
+const config = require(`${global.ROOT}/config`);
 
 const secret = config.key;
 
