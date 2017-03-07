@@ -1,0 +1,24 @@
+@charset "utf-8";
+
+$contHeight: 300px;
+
+/* 슬라이더 컨테이너 (팝업 모드) */
+.slider-popup.outer {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.slider-popup.inner {
+    position: fixed;
+    margin-top: -($contHeight/2);/* half of content height*/
+    width: 100%;
+}
+
+.slider-popup.inner .slick-dots {
+    bottom: inherit;
+}
+
+.slick-slide img {
+    display: inline;
+    vertical-align: top;
+    height: $contHeight
+}

@@ -40,6 +40,9 @@ module.exports = {
       test: /\.css$/,
       loaders: ['style', 'css?sourceMap', 'postcss-loader']
     }, {
+      test: /\.scss$/,
+      loaders: ['style', 'css?sourceMap', 'sass?sourceMap', 'postcss-loader']
+    }, {
       test: /\.html/,
       loaders: ['raw-loader']
     }, {

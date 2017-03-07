@@ -22,11 +22,8 @@ module.exports = {
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new HtmlWebpackPlugin({
-      template: `${ROOT}/index.html`,
+      template: `${ROOT}/index_prod.html`,
       inject: false,
-      assets: {
-        style: 'style.css'
-      },
       minify: {
         collapseWhitespace: true,
         conservativeCollapse: true,
@@ -57,6 +54,9 @@ module.exports = {
     }, {
       test: /\.css$/,
       loader: ExtractTextPlugin.extract('style', 'css!postcss-loader', {publicPath: './'})
+    }, {
+      test: /\.scss$/,
+      loader: ExtractTextPlugin.extract('style', 'css!sass!postcss-loader', {publicPath: './'})
     }, {
       test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
       loader: 'url?limit=10000&mimetype=application/font-woff&name=fonts/[name].[ext]'

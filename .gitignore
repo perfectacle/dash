@@ -3,5 +3,5 @@ node_modules
 app/dist
 *.iml
 *.log
-config.js
+config.json
 test*.js

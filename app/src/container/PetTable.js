@@ -86,7 +86,18 @@ export default class DataTable extends Component {
     });
   }
 
-  hideImgs() {
+  hideImgs(e) {
+    if(e.nativeEvent.keyCode) { // 키보드를 눌렀을 경우
+      // ESC 키를 누르지 않은 경우
+      if(e.nativeEvent.keyCode !== 27) return;
+    } else { // 키보드를 누르지 않은 경우
+      // 이미지 탐색을 위한 목록의 공백 및 버튼을 눌렀거나 이미지를 눌렀을 경우나 이미지가 감쳐진 경우
+      if(e.target.nodeName === 'UL' ||
+         e.target.nodeName === 'BUTTON' ||
+         e.target.nodeName === 'IMG' ||
+         !this.state.isImgsVisible) return;
+    }
+
     this.setState({
       isImgsVisible: false,
       imgs: null
@@ -98,8 +109,9 @@ export default class DataTable extends Component {
 
     return(
       <div>
-        <ImgSlider isVisible={isImgsVisible} imgs={imgs} hideImgs={() => this.hideImgs()} />
-        <Table columns={columns} isTransparent={isImgsVisible} />
+        {/* 이미지 슬라이더는 수직 중앙 정렬 때문에 상단 margin이 생겨서 div 컨테이너에 이벤트 바인딩 */}
+        <ImgSlider isVisible={isImgsVisible} imgs={imgs} hideImgs={e => this.hideImgs(e)} />
+        <Table columns={columns} />
       </div>
     );
   }

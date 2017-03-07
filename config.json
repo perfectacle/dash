@@ -1,0 +1,16 @@
+{
+  "key": "SeCrEtKeYfOrHaShInG",
+  "users": {
+    "admin": {
+      "pw": "1234"
+    }
+  },
+  "db": {
+    "dialect": "mysql",
+    "host": "doore-staging.coyp9rvhiomn.ap-northeast-2.rds.amazonaws.com",
+    "port": "3306",
+    "database": "dadais_test",
+    "id": "root",
+    "pw": "dooredoore"
+  }
+}

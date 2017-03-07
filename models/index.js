@@ -3,7 +3,11 @@
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize('mysql://root:1234@localhost/test');
+const config = require(`${global.ROOT}/config`);
+const sequelize = new Sequelize(config.db.database, config.db.id, config.db.pw, {
+  host: config.db.host,
+  dialect: config.db.dialect
+});
 const associations = require('./associations');
 const db = {};
 
